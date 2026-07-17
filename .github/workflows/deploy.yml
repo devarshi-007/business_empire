@@ -34,6 +34,7 @@ jobs:
         with:
           node-version: 20
           cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml   # ← added: monorepo lockfile location
 
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
@@ -41,13 +42,8 @@ jobs:
       - name: Build
         working-directory: artifacts/business-board-game
         env:
-          # GitHub Pages project sites are served from /<repo-name>/, so the
-          # built asset URLs must be prefixed with that path. Update this if
-          # the repo is ever renamed.
           BASE_PATH: /business-board-game/
           NODE_ENV: production
-          # Required by vite.config.ts at build time; unused by the static
-          # output itself since Pages serves the files directly.
           PORT: "5173"
         run: pnpm run build
 
