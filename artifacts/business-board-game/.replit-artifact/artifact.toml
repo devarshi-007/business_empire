@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "Business Board Game"
+version = "1.0.0"
+id = "artifacts/business-board-game"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24174
+
+[services.development]
+run = "pnpm --filter @workspace/business-board-game run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/business-board-game", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/business-board-game/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24174"
+BASE_PATH = "/"
