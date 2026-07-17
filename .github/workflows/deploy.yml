@@ -42,7 +42,7 @@ jobs:
       - name: Build
         working-directory: artifacts/business-board-game
         env:
-          BASE_PATH: /business-board-game/
+          BASE_PATH: /business_empire/
           NODE_ENV: production
           PORT: "5173"
         run: pnpm run build
